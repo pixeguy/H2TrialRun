@@ -19,6 +19,9 @@ public class TrackItemCounterInSR : MonoBehaviour
 
     public void deductCount()
     {
-        itemCount--;
+        if (itemCount > 0)
+        {
+            itemCount--;
+        }
     }
 }
