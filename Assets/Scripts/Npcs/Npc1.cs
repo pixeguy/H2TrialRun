@@ -1,9 +1,14 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Npc1 : InteractibleObject
 {
+    public UnityEvent interactAction;
     public override void Interact()
     {
-        Debug.Log("Hello, I am Npc1. Nice to meet you!");
+        if(Input.GetKey(KeyCode.E))
+        {
+            interactAction.Invoke();
+        }
     }
 }

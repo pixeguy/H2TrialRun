@@ -29,4 +29,16 @@ public class CheckTrigger : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        foreach (CollisionTarget target in targets)
+        {
+            if (((1 << collision.gameObject.layer) & target.lm.value) != 0)
+            {
+                target.onCollisionStay.Invoke();
+                return;
+            }
+        }
+    }
 }
