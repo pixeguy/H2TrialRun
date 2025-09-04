@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class DialogueActivator : MonoBehaviour
@@ -9,6 +10,7 @@ public class DialogueActivator : MonoBehaviour
     public Image portrait;
     public TextMeshProUGUI dialogueText;
     public float textSpeed = 0.05f;
+    public UnityEvent onDialogueEnd;
     public List<DialogueLines> dialogueLines;
     private int currentIndex = 0;
     private bool inDialogue = false;
@@ -48,6 +50,7 @@ public class DialogueActivator : MonoBehaviour
         }
         else
         {
+            onDialogueEnd.Invoke();
             var dialogueBox = GameObject.FindGameObjectWithTag("DialogueBox");
             dialogueBox.transform.GetChild(0).gameObject.SetActive(false);
             inDialogue = false;

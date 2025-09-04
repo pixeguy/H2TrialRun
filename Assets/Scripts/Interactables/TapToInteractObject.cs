@@ -1,18 +1,33 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class TapToInteractObject : InteractibleObject
+public class TapToInteractObject : InteractibleObject, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
     public UnityEvent interactAction;
+    private Tween scaleTween;
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        scaleTween?.Kill();
+        scaleTween = transform.DOScale(Vector3.one * 1.1f, 0.2f).SetEase(Ease.OutBack);
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        scaleTween?.Kill();
+        scaleTween = transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.InOutQuad);
+    }
+
     public override void Interact()
     {
     }
-    void OnMouseUpAsButton()
+
+    public void OnPointerClick(PointerEventData eventData)
     {
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-            return;
-        Interact();
+        if (!canInteract) return;
+        BounceAction();
         interactAction.Invoke();
     }
 }
