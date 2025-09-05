@@ -1,5 +1,6 @@
 using DG.Tweening;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -12,6 +13,8 @@ public class ItemSlot : MonoBehaviour
     public Image ItemSprite;
     public TextMeshProUGUI ItemCount;
     public Inventory inventory;
+
+    public event Action<List<ItemInstance>> ClickedStack;
 
     public void SetComponents()
     {
@@ -30,14 +33,6 @@ public class ItemSlot : MonoBehaviour
             c.a = 0;
             ItemSprite.color = c;
             ItemCount.text = "";
-        }
-    }
-
-    public void RemoveItem()
-    {
-        if (item != null && item.Count > 0)
-        {
-            inventory.RemoveFromInventory(itemType);
         }
     }
 
@@ -78,5 +73,46 @@ public class ItemSlot : MonoBehaviour
             {
                 ItemCount.transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.InOutQuad);
             });
+    }
+
+    public virtual void PlayRemoveFromStackTween()
+    {
+        ItemSprite.transform.DOKill();
+        ItemCount.transform.DOKill();
+
+        ItemSprite.transform.localScale = Vector3.one;
+        ItemCount.transform.localScale = Vector3.one;
+
+        // inward “deflate” punch
+        ItemSprite.transform.DOPunchScale(Vector3.one * -0.12f, 0.22f, 8, 1);
+        ItemCount.transform.DOPunchScale(Vector3.one * -0.08f, 0.22f, 8, 1);
+    }
+
+    public virtual void PlayRemoveStackTween()
+    {
+        ItemSprite.transform.DOKill();
+        ItemCount.transform.DOKill();
+
+        ItemSprite.transform.localScale = Vector3.one;
+        ItemCount.transform.localScale = Vector3.one;
+
+        ItemSprite.transform
+            .DOScale(1.15f, 0.10f).SetEase(Ease.OutBack)
+            .OnComplete(() => ItemSprite.transform.DOScale(0f, 0.15f).SetEase(Ease.InBack));
+
+        ItemCount.transform
+            .DOScale(1.10f, 0.10f).SetEase(Ease.OutBack)
+            .OnComplete(() => ItemCount.transform.DOScale(0f, 0.15f).SetEase(Ease.InBack));
+        DOVirtual.DelayedCall(0.25f, () =>
+        {
+            item = null;
+            itemType = null;
+            SetComponents();
+        });
+    }
+
+    public void OnClickEvent()
+    {
+        ClickedStack.Invoke(item);
     }
 }

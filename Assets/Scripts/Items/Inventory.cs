@@ -12,6 +12,8 @@ public class Inventory : ScriptableObject
 
     public event Action<Item> OnItemAddedToExistingStack;
     public event Action<Item> OnNewItemStackCreated;
+    public event Action<Item> OnRemoveItemFromExistingStack;
+    public event Action<Item> OnRemoveItemStack;
 
     private void OnEnable()
     {
@@ -54,8 +56,14 @@ public class Inventory : ScriptableObject
 
                 // Optional: remove the whole entry if list is now empty
                 if (instanceList.Count == 0)
+                {
                     itemInventory.RemoveAt(i);
-
+                    OnRemoveItemStack?.Invoke(itemToRemove);
+                }
+                else
+                {
+                    OnRemoveItemFromExistingStack?.Invoke(itemToRemove);
+                }
                 break;
             }
         }

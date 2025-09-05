@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ItemManagerTemplate : MonoBehaviour
 {
+    public enum InventoryUIEvent { AddToStack, NewStack, RemoveFromStack, RemoveStack }
+
     public List<ItemSlot> itemSlots = new List<ItemSlot>();
     public List<KeyValuePair<Item, List<ItemInstance>>> items = new List<KeyValuePair<Item, List<ItemInstance>>>();
     public Inventory inventory;
@@ -14,6 +16,8 @@ public class ItemManagerTemplate : MonoBehaviour
         {
             inventory.OnItemAddedToExistingStack += OnAddToStack;
             inventory.OnNewItemStackCreated += OnNewStack;
+            inventory.OnRemoveItemFromExistingStack += OnRemoveFromStack;
+            inventory.OnRemoveItemStack += OnRemoveStack;
         }
     }
 
@@ -23,6 +27,8 @@ public class ItemManagerTemplate : MonoBehaviour
         {
             inventory.OnItemAddedToExistingStack -= OnAddToStack;
             inventory.OnNewItemStackCreated -= OnNewStack;
+            inventory.OnRemoveItemFromExistingStack -= OnRemoveFromStack;
+            inventory.OnRemoveItemStack -= OnRemoveStack;
         }
     }
 
@@ -35,27 +41,43 @@ public class ItemManagerTemplate : MonoBehaviour
     public void OnAddToStack(Item item)
     {
         InventoryChanged();
-        ItemSlotBounce(item, false);
+        ItemSlotBounce(item, InventoryUIEvent.AddToStack);
     }
 
     public void OnNewStack(Item item)
     {
         InventoryChanged();
-        ItemSlotBounce(item, true);
+        ItemSlotBounce(item, InventoryUIEvent.NewStack);
+    }
+    public void OnRemoveFromStack(Item item)
+    {
+        InventoryChanged();
+        ItemSlotBounce(item, InventoryUIEvent.RemoveFromStack);
+    }
+    public void OnRemoveStack(Item item)
+    {
+        ItemSlotBounce(item, InventoryUIEvent.RemoveStack);
     }
 
-    public void ItemSlotBounce(Item item, bool isNewStack)
+    ItemSlot FindSlot(Item item)
     {
         foreach (var slot in itemSlots)
-        {
             if (slot.itemType == item)
-            {
-                if (isNewStack)
-                    slot.PlayNewStackTween(); // start from scale 0
-                else
-                    slot.PlayAddToStackTween(); // small punch
-                break;
-            }
+                return slot;
+        return null;
+    }
+
+    public void ItemSlotBounce(Item item, InventoryUIEvent change)
+    {
+        var slot = FindSlot(item);
+        if (slot == null) return;
+
+        switch (change)
+        {
+            case InventoryUIEvent.AddToStack: slot.PlayAddToStackTween(); break;
+            case InventoryUIEvent.NewStack: slot.PlayNewStackTween(); break;
+            case InventoryUIEvent.RemoveFromStack: slot.PlayRemoveFromStackTween(); break; // inward punch
+            case InventoryUIEvent.RemoveStack: slot.PlayRemoveStackTween(); break; // enlarge then shrink to 0
         }
     }
 

@@ -20,6 +20,12 @@ public class TapToDisappear : TapToInteractObject
         // Step 2: Shrink to zero after the bounce
         seq.Append(transform.DOScale(Vector3.zero, 0.25f).SetEase(Ease.InBack));
     }
+    public void AppearAction()
+    {
+        Sequence seq = DOTween.Sequence()
+         .Append(transform.DOScale(1f, 0.25f).SetEase(Ease.OutBack))
+         .Append(transform.DOPunchScale(Vector3.one * 0.08f, 0.18f, 8, 1));
+    }
     public override void OnPointerClick(PointerEventData eventData)
     {
         if(!existing) return;
@@ -42,5 +48,10 @@ public class TapToDisappear : TapToInteractObject
 
         scaleTween?.Kill();
         scaleTween = transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.InOutQuad);
+    }
+
+    public void QueueReturnBusItem(Item itemType)
+    {
+        ReturnBus.Enqueue(itemType, this);
     }
 }
