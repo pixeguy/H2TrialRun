@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,6 +9,9 @@ using UnityEngine;
 public class Inventory : ScriptableObject
 {
     public List<KeyValuePair<Item, List<ItemInstance>>> itemInventory = new();
+
+    public event Action<Item> OnItemAddedToExistingStack;
+    public event Action<Item> OnNewItemStackCreated;
 
     private void OnEnable()
     {
@@ -27,11 +31,13 @@ public class Inventory : ScriptableObject
                 itemInventory[idx] = new KeyValuePair<Item, List<ItemInstance>>(itemInventory[idx].Key, stack);
             }
             stack.Add(itemInstance);
+            OnItemAddedToExistingStack?.Invoke(itemInstance.item);
         }
         else
         {
             // create a new pair with a new list
             itemInventory.Add(new KeyValuePair<Item, List<ItemInstance>>(itemInstance.item, new List<ItemInstance> { itemInstance }));
+            OnNewItemStackCreated?.Invoke(itemInstance.item);
         }
     }
 

@@ -279,7 +279,7 @@ GameObject:
   - component: {fileID: 3722226772610794028}
   - component: {fileID: 6842753477877674228}
   m_Layer: 5
-  m_Name: FlightCaseObjects
+  m_Name: FlightCaseItemSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

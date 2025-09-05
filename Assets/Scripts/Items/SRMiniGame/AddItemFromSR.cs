@@ -19,4 +19,10 @@ public class AddItemFromSR : MonoBehaviour
             item.itemCount = 0;
         }
     }
+
+    public void AddItem(Item itemType)
+    {
+        var newItem = new ItemInstance(itemType);
+        inventory.AddToInventory(newItem);
+    }
 }
