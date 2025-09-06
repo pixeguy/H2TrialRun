@@ -4,16 +4,16 @@ using UnityEngine; // for Unity 'null' checks on UnityEngine.Object
 public static class ReturnBus
 {
     // per-Item queue of TapToDisappear sources
-    private static readonly Dictionary<Item, Queue<TapToDisappear>> _q = new();
+    private static readonly Dictionary<Item, Queue<BigItemBehaviour>> _q = new();
 
-    public static void Enqueue(Item key, TapToDisappear src)
+    public static void Enqueue(Item key, BigItemBehaviour src)
     {
         if (!key || !src) return;
-        if (!_q.TryGetValue(key, out var queue)) _q[key] = queue = new Queue<TapToDisappear>();
+        if (!_q.TryGetValue(key, out var queue)) _q[key] = queue = new Queue<BigItemBehaviour>();
         queue.Enqueue(src);
     }
 
-    public static TapToDisappear Dequeue(Item key)
+    public static BigItemBehaviour Dequeue(Item key)
     {
         if (!_q.TryGetValue(key, out var queue) || queue.Count == 0) return null;
         return queue.Dequeue();

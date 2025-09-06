@@ -5,6 +5,7 @@ public class ToggleUIGroups : MonoBehaviour
 {
     CanvasGroup[] canvasGroups;
     TapToInteractObject[] tapToInteractObjects;
+    TapToInteractObject[] currentTapToInteractObjects;
     CanvasGroup currentGroup;
 
     public void DisableAllOtherGroups()
@@ -18,11 +19,13 @@ public class ToggleUIGroups : MonoBehaviour
         if (specificGroup != null)
         {
             var specGroup = specificGroup.GetComponent<CanvasGroup>();
+            currentTapToInteractObjects = specificGroup.GetComponentsInChildren<TapToInteractObject>(true);
             currentGroup = specGroup;
         }
         else
         {
             currentGroup = GetComponent<CanvasGroup>();
+            currentTapToInteractObjects = GetComponentsInChildren<TapToInteractObject>(true);
         }
         foreach (CanvasGroup group in canvasGroups)
         {
@@ -44,6 +47,8 @@ public class ToggleUIGroups : MonoBehaviour
         {
             obj.canInteract = false;
         }
+        foreach(TapToInteractObject obj in currentTapToInteractObjects)
+        { obj.canInteract = true; }
     }
 
     public void ToggleGroups()
@@ -58,10 +63,12 @@ public class ToggleUIGroups : MonoBehaviour
         if (specificGroup != null)
         {
             currentGroup = specificGroup.GetComponent<CanvasGroup>();
+            currentTapToInteractObjects = specificGroup.GetComponentsInChildren<TapToInteractObject>(true);
         }
         else
         {
             currentGroup = GetComponent<CanvasGroup>();
+            currentTapToInteractObjects = GetComponentsInChildren<TapToInteractObject>(true);
         }
 
         // Check if any other group is enabled
@@ -85,10 +92,15 @@ public class ToggleUIGroups : MonoBehaviour
             currentGroup.interactable = !newState;
             currentGroup.blocksRaycasts = !newState;
             currentGroup.alpha = !newState ? 1f : 0.5f;
+            foreach (TapToInteractObject obj in currentTapToInteractObjects)
+            { obj.canInteract = !newState; }
         }
-        else {             currentGroup.interactable = true;
+        else {             
+            currentGroup.interactable = true;
             currentGroup.blocksRaycasts = true;
             currentGroup.alpha = 1f;
+            foreach (TapToInteractObject obj in currentTapToInteractObjects)
+            { obj.canInteract = true; }
         }
         // Update all other groups
         foreach (CanvasGroup group in canvasGroups)
