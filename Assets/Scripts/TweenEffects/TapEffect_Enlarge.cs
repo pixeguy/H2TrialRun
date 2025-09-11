@@ -14,6 +14,7 @@ public class TapEffect_Enlarge : MonoBehaviour, ITapEffect
     {
         if (!target) return null;
         target.DOKill();
+
         return target.DOScale(Vector3.one * toScale, duration).SetEase(ease);
     }
 }

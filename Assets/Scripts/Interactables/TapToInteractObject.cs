@@ -1,4 +1,4 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -39,21 +39,20 @@ public class TapToInteractObject : InteractibleObject, IPointerDownHandler, IPoi
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!canInteract) return;
+        Debug.Log("onPointerClick");
         Play(onTap);
         interactAction.Invoke();
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("checking");
         if (!canInteract) return;
-        Debug.Log("canInteract");
         Play(onHold);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         if (!canInteract) return;
-
+        Debug.Log("onPointerUp");
         Play(onRelease);
     }
 

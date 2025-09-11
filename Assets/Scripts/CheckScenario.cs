@@ -35,20 +35,20 @@ public class CheckScenario : MonoBehaviour
         // 3. Compare counts
         if (itemArrayCounts.Count != inventoryCounts.Count)
         {
-            Debug.Log("Scenario check failed: Different number of unique items.");
+            ErrorManager.instance.Init("You Don't Have The Correct Items!");
             return;
         }
         foreach (var pair in itemArrayCounts)
         {
             if (!inventoryCounts.TryGetValue(pair.Key, out int invCount))
             {
-                Debug.Log("Scenario check failed: Different number of unique items.");
+                ErrorManager.instance.Init("You Don't Have The Correct Items!");
                 return;
             }
 
             if (invCount != pair.Value)
             {
-                Debug.Log("Scenario check failed: Different number of unique items.");
+                ErrorManager.instance.Init("You Don't Have The Correct Items!");
                 return;
             }
         }

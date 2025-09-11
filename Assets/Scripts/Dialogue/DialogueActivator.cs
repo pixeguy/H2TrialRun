@@ -29,6 +29,10 @@ public class DialogueActivator : MonoBehaviour
     {
         var line = dialogueLines[currentIndex];
         dialogueText.text = string.Empty;
+        foreach(var action in dialogueLines[currentIndex].actionsToPlay)
+        {
+            action.Play();
+        }
 
         // Wait one frame to ensure UI updates (a missing character bug occurs without this)
         yield return null;
@@ -42,6 +46,10 @@ public class DialogueActivator : MonoBehaviour
 
     void NextLine()
     {
+        foreach(var action in dialogueLines[currentIndex].actionsToPlay)
+        {
+            action.End();
+        }
         if (currentIndex < dialogueLines.Count - 1)
         {
             currentIndex++;

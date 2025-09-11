@@ -33,7 +33,7 @@ public class ToggleUIGroups : MonoBehaviour
             {
                 group.interactable = false;
                 group.blocksRaycasts = false;
-                group.alpha = 0.5f; // Optional: visually indicate it's disabled
+                group.alpha = 0f; // Optional: visually indicate it's disabled
             }
             else
             {
@@ -91,7 +91,7 @@ public class ToggleUIGroups : MonoBehaviour
         {
             currentGroup.interactable = !newState;
             currentGroup.blocksRaycasts = !newState;
-            currentGroup.alpha = !newState ? 1f : 0.5f;
+            currentGroup.alpha = !newState ? 1f : 0f;
             foreach (TapToInteractObject obj in currentTapToInteractObjects)
             { obj.canInteract = !newState; }
         }
@@ -109,7 +109,7 @@ public class ToggleUIGroups : MonoBehaviour
 
                 group.interactable = newState;
                 group.blocksRaycasts = newState;
-                group.alpha = (newState) ? 1f : 0.5f;
+                group.alpha = (newState) ? 1f : 0f;
             }
 
         // Toggle all interactable objects
