@@ -12,7 +12,8 @@ public class TapEffect_UnEnlarge : MonoBehaviour, ITapEffect
     public Tween Play()
     {
         if (!target) return null;
-        target.DOKill();
-        return target.DOScale(Vector3.one, duration).SetEase(ease);
+        target.DOKill(true);
+        var t = target.DOScale(Vector3.one, duration).SetEase(ease).SetId(target.GetInstanceID());
+        return target.DOScale(Vector3.one, duration).SetEase(ease).SetId("delarge" + target.GetInstanceID());
     }
 }

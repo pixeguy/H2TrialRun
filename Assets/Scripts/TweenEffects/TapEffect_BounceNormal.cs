@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class TapEffect_Bounce : MonoBehaviour, ITapEffect
+public class TapEffect_BounceNormal : MonoBehaviour, ITapEffect
 {
     public Transform target;
     public float punchAmount = 0.2f;
@@ -18,7 +18,6 @@ public class TapEffect_Bounce : MonoBehaviour, ITapEffect
         target.DOKill(true);
 
         target.localScale = Vector3.one;
-        var t = target.DOPunchScale(Vector3.one * punchAmount, duration, vibrato, elasticity).SetId(target.GetInstanceID());
-        return target.DOScale(Vector3.one, duration).From(Vector3.one).SetEase(ease).SetId("bounce" + target.GetInstanceID());
+        return target.DOPunchScale(Vector3.one * punchAmount, duration, vibrato, elasticity).SetId(target.GetInstanceID());
     }
 }

@@ -81,7 +81,8 @@ public class ItemManagerTemplate : MonoBehaviour
         }
     }
 
-    public virtual void InventoryChanged() {
+    public virtual void InventoryChanged()
+    {
     }
 
     public void GetSlots()
@@ -91,22 +92,41 @@ public class ItemManagerTemplate : MonoBehaviour
 
     public void UpdateSlots()
     {
-        for (int i = 0; i < itemSlots.Count; i++)
-        {
-            if (i < items.Count)
-            {
-                var kvp = items[i];
-                var slot = itemSlots[i];
+        var usedSlots = new HashSet<ItemSlot>();
 
-                // Assign item and type
-                slot.item = kvp.Value;
-                slot.itemType = kvp.Key;
-                slot.SetComponents();
+        // Step 2: place/update items
+        foreach (var kvp in items) // each KeyValuePair<Item, List<ItemInstance>>
+        {
+            // Try to find an existing slot with this item
+            var existing = itemSlots.Find(s => s.itemType == kvp.Key);
+
+            if (existing != null)
+            {
+                // Update existing slot
+                existing.item = kvp.Value;
+                existing.itemType = kvp.Key;
+                existing.SetComponents();
+                usedSlots.Add(existing);
             }
             else
             {
-                // Clear unused slots
-                var slot = itemSlots[i];
+                // Find first empty slot
+                var empty = itemSlots.Find(s => s.itemType == null);
+                if (empty != null)
+                {
+                    empty.item = kvp.Value;
+                    empty.itemType = kvp.Key;
+                    empty.SetComponents();
+                    usedSlots.Add(empty);
+                }
+            }
+        }
+
+        // Step 3: clear slots not used
+        foreach (var slot in itemSlots)
+        {
+            if (!usedSlots.Contains(slot))
+            {
                 slot.item = null;
                 slot.itemType = null;
                 slot.SetComponents();

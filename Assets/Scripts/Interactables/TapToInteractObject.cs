@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using static UnityEngine.GraphicsBuffer;
 
 public class TapToInteractObject : InteractibleObject, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
@@ -10,6 +11,7 @@ public class TapToInteractObject : InteractibleObject, IPointerDownHandler, IPoi
     public TapEffectKey onTap;
     public TapEffectKey onHold;
     public TapEffectKey onRelease;
+    public Tween objectTween;
     Dictionary<TapEffectKey, List<TapEffectGroup>> map;
 
 
@@ -39,7 +41,8 @@ public class TapToInteractObject : InteractibleObject, IPointerDownHandler, IPoi
     public void OnPointerClick(PointerEventData eventData)
     {
         if (!canInteract) return;
-        Debug.Log("onPointerClick");
+        transform.DOKill(true);
+        transform.localScale = Vector3.one;
         Play(onTap);
         interactAction.Invoke();
     }
@@ -47,12 +50,23 @@ public class TapToInteractObject : InteractibleObject, IPointerDownHandler, IPoi
     {
         if (!canInteract) return;
         Play(onHold);
+
+    }
+    private void Update()
+    {
+        if (DOTween.IsTweening(transform.GetInstanceID()))
+        {
+            Debug.Log("Tween with this ID is running!");
+            //transform.DOKill(true);
+            //DOTween.Kill("enlarge"  + transform.GetInstanceID(),false);
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         if (!canInteract) return;
         Debug.Log("onPointerUp");
+        transform.DOKill(true);
         Play(onRelease);
     }
 

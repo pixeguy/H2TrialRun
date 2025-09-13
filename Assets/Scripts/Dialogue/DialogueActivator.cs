@@ -71,11 +71,11 @@ public class DialogueActivator : MonoBehaviour
     {
         if (inDialogue && Input.GetMouseButtonUp(0))
         {
-            if(!firstClick)
-            {
-                firstClick = true;
-                return;
-            }
+            //if(!firstClick)
+            //{
+            //    firstClick = true;
+            //    return;
+            //}
             Click();
         }
     }

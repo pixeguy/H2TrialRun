@@ -15,4 +15,9 @@ public class ToggleAnimatorBool : MonoBehaviour
             Debug.LogWarning("No Animator component found on this GameObject.");
         }
     }
+
+    public void ToggleActive()
+    {
+        gameObject.SetActive(!gameObject.activeSelf);
+    }
 }
