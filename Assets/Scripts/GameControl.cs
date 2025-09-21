@@ -8,18 +8,13 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-[Serializable]
-public class ActivationRule
-{
-    public UnityEvent func;
-    public float activateDelay;
-}
+
 public class GameControl : MonoBehaviour
 {
     [HideInInspector]
     public float waitForAnimTime;
 
-    public ActivationRule[] rules;
+    public ForceInventoryChange inventoryChange;
 
     public static GameControl instance;
 
@@ -36,36 +31,13 @@ public class GameControl : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        foreach (ActivationRule rule in rules)
-        {
-            StartCoroutine(Activate(rule));
-        }
-    }
-
     private void Update()
     {
-        //if (!instance.isBulletTime)
-        //{
-        //    instance.time = 1f;
-        //    instance.lerpTime = .5f;
-        //}
-        //else
-        //{
-        //    instance.time = 0.1f;
-        //    instance.lerpTime = 0.01f;
-        //}
-        //Time.timeScale = Mathf.Lerp(Time.timeScale, instance.time, instance.lerpTime);
-
-        //Debug.Log($"[TimeScaleDebugger] Time.timeScale = {Time.timeScale}");
-    }
-
-
-    private IEnumerator Activate(ActivationRule rule)
-    {
-        yield return new WaitForSeconds(rule.activateDelay);
-        rule.func.Invoke();
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SceneManager.LoadScene("Scene 2");
+            inventoryChange.ChangeToScene2Inventory(ScenarioPicker.instance.currentScenario.TFAInventory);
+        }
     }
 
     //--------------------------SetPlayer--------------------------------

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,26 @@ public class DropGameObjectManager : MonoBehaviour
 {
     public List<DropGameObject> items;
     public static DropGameObjectManager instance;
+    public SetUpTFA setUp;
+
+    private void OnDestroy()
+    {
+        setUp.onCreateDropSlot -= AddSlot;
+    }
+
+    private void AddSlot(GameObject obj)
+    {
+        DropGameObject drop = obj.GetComponent<DropGameObject>();
+        if (drop != null)
+        {
+            items.Add(drop);
+        }
+        else
+        {
+            Debug.LogWarning("GameObject does not have DropGameObject component attached: " + obj.name);
+        }
+    }
+
     private void Start()
     {
         instance = this;
@@ -13,18 +34,16 @@ public class DropGameObjectManager : MonoBehaviour
         {
             items.Add(item);
         }
+        setUp.onCreateDropSlot += AddSlot;
     }
 
-    public void TryAssignItem()
+    public bool TryAssignItem(Item itemType)
     {
         foreach (var item in items)
         {
-            if(item.CheckMousePos() == false) { continue; }
-            if (item.CheckItemType(ItemDraggableManager.instance.currentItem.itemType) == false) { continue; }
-            else
-            {
-                ItemDraggableManager.instance.currentItem.transform.position = item.transform.position;
-            }
+            if(item.CheckDrop(itemType)) { return true; }
+            else { continue; }
         }
+        return false;
     }
 }

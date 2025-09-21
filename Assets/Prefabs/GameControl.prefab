@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 320900170980624873}
   - component: {fileID: 4408011114049651071}
+  - component: {fileID: 3445326223086312881}
   m_Layer: 0
   m_Name: GameControl
   m_TagString: Untagged
@@ -47,6 +48,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitForAnimTime: 0
   rules: []
+  inventoryChange: {fileID: 3445326223086312881}
+--- !u!114 &3445326223086312881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908988096676699318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd901ce5674961d44a37b03a15e0d135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerInventory: {fileID: 11400000, guid: e8d31658566fff440b864a50b75bd429, type: 2}
 --- !u!1001 &5674457720062646212
 PrefabInstance:
   m_ObjectHideFlags: 0

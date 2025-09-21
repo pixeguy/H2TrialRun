@@ -21,10 +21,10 @@ public class ScenarioPicker : MonoBehaviour
 
     public void Update()
     {
-        if (scenarioList.scenarios.Count != 0 && currentScenario == null)
+        if (scenarioList.scenarios.Count != 0 && instance.currentScenario == null)
         {
-            currentScenario = scenarioList.scenarios[Random.Range(0, scenarioList.scenarios.Count)];
-            Debug.Log("Picked scenario: " + currentScenario.name);
+            instance.currentScenario = scenarioList.scenarios[Random.Range(0, scenarioList.scenarios.Count)];
+            Debug.Log("SDF");
         }
     }
 }

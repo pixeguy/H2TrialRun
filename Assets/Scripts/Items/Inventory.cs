@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
+[System.Serializable]
+public class ItemStack
+{
+    public Item item;
+    public List<ItemInstance> instances = new();
+}
 
 [CreateAssetMenu(fileName = "Inventory", menuName = "Scriptable Objects/Inventory")]
 public class Inventory : ScriptableObject
 {
+    public List<ItemStack> presetStacks = new(); // for inspector editing
+
     public List<KeyValuePair<Item, List<ItemInstance>>> itemInventory = new();
 
     public event Action<Item> OnItemAddedToExistingStack;
@@ -18,6 +25,17 @@ public class Inventory : ScriptableObject
     private void OnEnable()
     {
         itemInventory.Clear();
+        foreach (var stack in presetStacks)
+        {
+            if (stack.item != null && stack.instances != null && stack.instances.Count > 0)
+            {
+                // You can deep-copy if needed:
+                itemInventory.Add(new KeyValuePair<Item, List<ItemInstance>>(
+                    stack.item,
+                    new List<ItemInstance>(stack.instances)
+                ));
+            }
+        }
     }
 
     public void AddToInventory(ItemInstance itemInstance)
@@ -66,6 +84,33 @@ public class Inventory : ScriptableObject
                 }
                 break;
             }
+        }
+    }
+
+    public void CopyFrom(Inventory other)
+    {
+        // Clear current inventory
+        itemInventory.Clear();
+
+        // Copy items from other inventory
+        foreach (var kvp in other.itemInventory)
+        {
+            // Clone the item instances
+            List<ItemInstance> clonedList = new List<ItemInstance>();
+            foreach (var instance in kvp.Value)
+            {
+                // Assuming you want a shallow copy of instances (or make a deep copy if needed)
+                ItemInstance newInstance = new ItemInstance(instance.item);
+                clonedList.Add(newInstance);
+            }
+
+            itemInventory.Add(new KeyValuePair<Item, List<ItemInstance>>(kvp.Key, clonedList));
+
+            // Fire event to notify something was added
+            if (clonedList.Count > 1)
+                OnItemAddedToExistingStack?.Invoke(kvp.Key);
+            else
+                OnNewItemStackCreated?.Invoke(kvp.Key);
         }
     }
 

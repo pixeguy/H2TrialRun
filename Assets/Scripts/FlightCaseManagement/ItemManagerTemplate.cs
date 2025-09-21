@@ -10,7 +10,7 @@ public class ItemManagerTemplate : MonoBehaviour
     public List<KeyValuePair<Item, List<ItemInstance>>> items = new List<KeyValuePair<Item, List<ItemInstance>>>();
     public Inventory inventory;
 
-    public void OnEnable()
+    public void Awake()
     {
         if (inventory != null)
         {
@@ -21,7 +21,7 @@ public class ItemManagerTemplate : MonoBehaviour
         }
     }
 
-    public void OnDisable()
+    public void OnDestroy()
     {
         if (inventory != null)
         {
@@ -54,12 +54,12 @@ public class ItemManagerTemplate : MonoBehaviour
         InventoryChanged();
         ItemSlotBounce(item, InventoryUIEvent.RemoveFromStack);
     }
-    public void OnRemoveStack(Item item)
+    public virtual void OnRemoveStack(Item item)
     {
         ItemSlotBounce(item, InventoryUIEvent.RemoveStack);
     }
 
-    ItemSlot FindSlot(Item item)
+    public ItemSlot FindSlot(Item item)
     {
         foreach (var slot in itemSlots)
             if (slot.itemType == item)
@@ -85,12 +85,12 @@ public class ItemManagerTemplate : MonoBehaviour
     {
     }
 
-    public void GetSlots()
+    public virtual void GetSlots()
     {
         itemSlots = new List<ItemSlot>(GetComponentsInChildren<ItemSlot>());
     }
 
-    public void UpdateSlots()
+    public virtual void UpdateSlots()
     {
         var usedSlots = new HashSet<ItemSlot>();
 

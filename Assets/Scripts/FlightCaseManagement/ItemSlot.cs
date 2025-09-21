@@ -114,6 +114,6 @@ public class ItemSlot : MonoBehaviour
     public void OnClickEvent()
     {
         if (itemType == null) return;
-        ClickedStack.Invoke(item);
+        ClickedStack?.Invoke(item);
     }
 }

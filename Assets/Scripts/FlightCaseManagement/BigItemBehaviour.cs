@@ -19,7 +19,6 @@ public class BigItemBehaviour : MonoBehaviour
             if (!map.TryGetValue(g.key, out var list)) map[g.key] = list = new List<TapEffectGroup>();
             list.Add(g);
         }
-        Debug.Log(map.Values);
     }
     public Tween Play(TapEffectKey key)
     {

@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 5b9ef55578b6e2f44875b1851fb11261
   m_SerializeEntries:
+  - m_GUID: c87a25563e5557d47868446b3f8dee2e
+    m_Address: Assets/Scripts/Scenario/Scenario2/Scenario2.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Scenarios
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e61fd8b9e1a47b449ae15922888b4076
     m_Address: Assets/Scripts/Scenario/Scenario1.asset
     m_ReadOnly: 0

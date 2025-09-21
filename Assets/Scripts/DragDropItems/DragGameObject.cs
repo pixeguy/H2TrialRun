@@ -15,20 +15,20 @@ public class DragGameObject : MonoBehaviour
         cam = Camera.main;
     }
 
-    private void OnMouseDown()
+    private void OnClick()
     {
         Vector3 mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cam.WorldToScreenPoint(transform.position).z));
         offset = transform.position - mouseWorldPos;
         onDrag.Invoke(this);
     }
 
-    private void OnMouseDrag()
+    private void OnDrag()
     {
         Vector3 mouseWorldPos = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cam.WorldToScreenPoint(transform.position).z));
         transform.position = mouseWorldPos + offset;
     }
 
-    private void OnMouseUp()
+    private void OnRelease()
     {
         onRelease.Invoke(this);
     }

@@ -20,7 +20,7 @@ public class ItemPopUp : MonoBehaviour
     public UnityEvent onPopUpClose;
 
 
-    void Start()
+    void Awake()
     {
         foreach (var slot in FindObjectsByType<ItemSlot>(FindObjectsSortMode.None))
             slot.ClickedStack += SetUpUI;   // subscribe
