@@ -45,5 +45,8 @@ TagManager:
   - name: DraggableItems
     uniqueID: 1854927501
     locked: 0
+  - name: UI maybe?
+    uniqueID: 4224243419
+    locked: 0
   m_RenderingLayers:
   - Default

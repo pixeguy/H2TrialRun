@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b67bbbdda66cf2438fbff7c6181f60f, type: 3}
-  m_Name: Scene2Inventory 1
+  m_Name: TFAInventory
   m_EditorClassIdentifier: 
   presetStacks:
-  - item: {fileID: 11400000, guid: d59a181d25eacb1448eccabc662fa553, type: 2}
-    instances:
-    - item: {fileID: 11400000, guid: d59a181d25eacb1448eccabc662fa553, type: 2}
   - item: {fileID: 11400000, guid: adbabca075079694f88989bf49777eaa, type: 2}
     instances:
     - item: {fileID: 11400000, guid: adbabca075079694f88989bf49777eaa, type: 2}
-    - item: {fileID: 11400000, guid: adbabca075079694f88989bf49777eaa, type: 2}
+  - item: {fileID: 11400000, guid: 72207fbad702b204a826d15bedbcdd23, type: 2}
+    instances:
+    - item: {fileID: 11400000, guid: 72207fbad702b204a826d15bedbcdd23, type: 2}
+  - item: {fileID: 11400000, guid: 41a34af73868c9e45abaea9957f056fe, type: 2}
+    instances:
+    - item: {fileID: 11400000, guid: 41a34af73868c9e45abaea9957f056fe, type: 2}

@@ -15,17 +15,51 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 5b9ef55578b6e2f44875b1851fb11261
   m_SerializeEntries:
+  - m_GUID: 41a34af73868c9e45abaea9957f056fe
+    m_Address: Assets/Scripts/Items/House.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 438e7e7dd0aa95747a8b99a1a4bcf579
+    m_Address: Assets/Scripts/Items/MicStand.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 492382d1cbb961340a074354ce6641b4
+    m_Address: Assets/Scripts/Items/XLR Cable.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72207fbad702b204a826d15bedbcdd23
+    m_Address: AnalogSpeakers
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a6f6c9d49f180a4d870136763146289
+    m_Address: Assets/Scripts/Items/Quater-Inch.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: adbabca075079694f88989bf49777eaa
+    m_Address: AnalogMixer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b4b0fe596d1c5714d8ebc1dc750086dc
+    m_Address: Assets/Scripts/Items/PowerDrum.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c87a25563e5557d47868446b3f8dee2e
     m_Address: Assets/Scripts/Scenario/Scenario2/Scenario2.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Scenarios
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e61fd8b9e1a47b449ae15922888b4076
-    m_Address: Assets/Scripts/Scenario/Scenario1.asset
+  - m_GUID: d59a181d25eacb1448eccabc662fa553
+    m_Address: Assets/Scripts/Items/FlightCase.asset
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - Scenarios
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: c80fbc57b86b3fc4180071f571f1bacf, type: 2}

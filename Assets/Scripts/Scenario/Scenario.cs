@@ -43,7 +43,7 @@ public class Scenario : ScriptableObject
         // Check 1: Overall count mismatch
         if (totalInstanceCount != positions.Count)
         {
-            Debug.LogWarning("Instance count and position count do not match.");
+            Debug.LogWarning("Instance count and position count do not match." + name);
             return null;
         }
 

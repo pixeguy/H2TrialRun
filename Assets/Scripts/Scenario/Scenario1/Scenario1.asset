@@ -16,16 +16,15 @@ MonoBehaviour:
   SRInventory: {fileID: 11400000, guid: 77097483ceba03d4ca07d8c47eaf0777, type: 2}
   TFAInventory: {fileID: 11400000, guid: dbb34240c5ec8c145b3732216bafe5ab, type: 2}
   TFAPositions:
-  - itemType: {fileID: 11400000, guid: d59a181d25eacb1448eccabc662fa553, type: 2}
-    position: {x: -5.46, y: 0.5, z: 0}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
-    objectPrefab: {fileID: 7866802139927122596, guid: c07607e15d6e02d43b61205dcf69c1e5, type: 3}
   - itemType: {fileID: 11400000, guid: adbabca075079694f88989bf49777eaa, type: 2}
-    position: {x: 0, y: 0.5, z: 0}
+    position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 0}
     objectPrefab: {fileID: 7866802139927122596, guid: c07607e15d6e02d43b61205dcf69c1e5, type: 3}
-  - itemType: {fileID: 11400000, guid: adbabca075079694f88989bf49777eaa, type: 2}
-    position: {x: 5, y: -0.9, z: 0}
-    rotation: {x: 0, y: 0, z: 0, w: 0}
-    objectPrefab: {fileID: 7866802139927122596, guid: c07607e15d6e02d43b61205dcf69c1e5, type: 3}
-  TFAMappedPositions: []
+  TFAMappedPositions:
+  - instance:
+      item: {fileID: 11400000, guid: adbabca075079694f88989bf49777eaa, type: 2}
+    position:
+      itemType: {fileID: 11400000, guid: adbabca075079694f88989bf49777eaa, type: 2}
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 0}
+      objectPrefab: {fileID: 7866802139927122596, guid: c07607e15d6e02d43b61205dcf69c1e5, type: 3}

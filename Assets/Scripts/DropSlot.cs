@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DropSlot : MonoBehaviour, IDropHandler
+public class DropSlot : MonoBehaviour
 {
-    public void OnDrop(PointerEventData eventData)
+    public virtual bool ReceiveDrop(GameObject obj)
     {
-        if(eventData.pointerDrag != null)
-        {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
-        }
+        obj.transform.position = transform.position;
+        return true;
     }
 }

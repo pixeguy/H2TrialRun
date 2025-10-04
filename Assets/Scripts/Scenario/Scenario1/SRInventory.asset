@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c72ce4c19e12d48a888ac9d0870eec, type: 3}
-  m_Name: AnalogSpeakers
+  m_Script: {fileID: 11500000, guid: 5b67bbbdda66cf2438fbff7c6181f60f, type: 3}
+  m_Name: SRInventory
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 4103154944269348219, guid: 9793b948692c62b4fa48e13e44c86766, type: 3}
-  itemName: Analog Speakers
-  itemDescription: ...
-  maxItemCount: 0
-  itemType: 1
+  presetStacks: []

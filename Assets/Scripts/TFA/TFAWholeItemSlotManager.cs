@@ -59,6 +59,7 @@ public class TFAWholeItemSlotManager : ItemManagerTemplate
 
     public override void OnRemoveStack(Item item)
     {
+
         ItemSlotBounce(item, InventoryUIEvent.RemoveStack);
 
         var slot = FindSlot(item);
@@ -75,12 +76,14 @@ public class TFAWholeItemSlotManager : ItemManagerTemplate
         // Optional: Kill old tweens
         for (int i = index + 1; i < itemSlots.Count; i++)
         {
-            itemSlots[i].transform.DOKill();
+            if(itemSlots[i] != null)
+                itemSlots[i].transform.DOKill();
         }
         DOVirtual.DelayedCall(0.25f, () =>
         {
             for (int i = index + 1; i < itemSlots.Count; i++)
             {
+                if(itemSlots[i] == null) continue;
                 RectTransform slotTransform = itemSlots[i].GetComponent<RectTransform>();
                 Vector3 targetPos = slotTransform.anchoredPosition + new Vector2(-150, 0);
                 slotTransform.DOAnchorPos(targetPos, 0.2f).SetEase(Ease.OutQuad);

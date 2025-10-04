@@ -19,17 +19,17 @@ public class MouseObserver : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        onMouseClickEvent(mousePos);
+        onMouseClickEvent?.Invoke(mousePos);
     }
 
     private void OnMouseDrag()
     {
-        onMouseDragEvent(mousePos);
+        onMouseDragEvent?.Invoke(mousePos);
     }
 
     private void OnMouseUp()
     {
-        onMouseReleaseEvent(mousePos);
+        onMouseReleaseEvent?.Invoke(mousePos);
     }
     Vector3 GetWorldPos()
     {

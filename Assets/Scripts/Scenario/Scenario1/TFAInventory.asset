@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c72ce4c19e12d48a888ac9d0870eec, type: 3}
-  m_Name: Speaker1
+  m_Script: {fileID: 11500000, guid: 5b67bbbdda66cf2438fbff7c6181f60f, type: 3}
+  m_Name: TFAInventory
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 0}
-  itemName: Speaker 1
-  itemDescription: ...
-  itemType: 1
+  presetStacks:
+  - item: {fileID: 11400000, guid: adbabca075079694f88989bf49777eaa, type: 2}
+    instances:
+    - item: {fileID: 11400000, guid: adbabca075079694f88989bf49777eaa, type: 2}

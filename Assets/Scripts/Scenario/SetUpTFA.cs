@@ -37,6 +37,14 @@ public class SetUpTFA : MonoBehaviour
                 positionData.position,
                 positionData.rotation
             );
+
+            var objSprite = obj.GetComponent<SpriteRenderer>();
+            var objCover = obj.GetComponentInChildren<SpriteRenderer>();
+            var objDropper = obj.GetComponent<DropGameObject>();
+            objSprite.sprite = positionData.itemType.Sprite;
+            objCover.sprite = positionData.itemType.Sprite;
+            objDropper.itemType = positionData.itemType;
+
             onCreateDropSlot?.Invoke(obj);
 
             obj.name = $"{positionData.itemType.name}_Instance";
